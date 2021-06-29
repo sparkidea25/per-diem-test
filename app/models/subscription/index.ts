@@ -1,11 +1,11 @@
 import mongoose, { Schema, Types } from "mongoose";
 
 const subSchema = new mongoose.Schema({
-  status: {
-    type: String,
-    enum: ["paid", "not_paid"],
-    required: true,
-  },
+//   status: {
+//     type: String,
+//     enum: ["paid", "not_paid"],
+//     required: true,
+//   },
   time: {
     type: Date,
     default: Date.now,

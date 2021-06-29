@@ -12,7 +12,7 @@ app.use(storeRouter);
 app.use(subscribeRouter);
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/kazifie-sevice", {
+  .connect("mongodb://127.0.0.1:27017/perdiem", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     dbName: "kazifie-service",

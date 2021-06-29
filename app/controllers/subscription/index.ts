@@ -1,18 +1,13 @@
 import express, { Router } from "express";
-import { CURRENCY, MIN_AMOUNT, MAX_AMOUNT } from "../../config";
 import Subscriber from "../../models/subscription";
-import { formatAmountForStripe } from "../../utils";
-import opts from "../../config/redisConnect";
 
 let api = Router();
 
 //checkifthereisanavailableslot
 //check if the user has clocked 0 coffee
-//
 
 api.post("/api/post/subscribe", async (req: any, res: any) => {
   const subscribe = new Subscriber({
-    status: req.body.status,
     time: req.body.time,
     user: req.body.user,
     store: req.body.store,
@@ -29,7 +24,6 @@ api.post("/api/post/order", async (req: any, res: any) => {
     const store_id = req.body.store;
     const order_amount = req.body.amount;
     //id user_id store_id initial_amount amount_left
-
     const subscription = await Subscriber.findOne({
       user: user_id,
       store: store_id,
@@ -42,14 +36,10 @@ api.post("/api/post/order", async (req: any, res: any) => {
       res.json({ message: "new order greater than order left" });
       return;
     }
-
     amount_left -= order_amount;
-
     if (amount_left == 0) amount_left = initial_amount;
-
     subscription.amount_left = amount_left;
     await subscription.save();
-
     res.send(subscription);
   } catch (error) {
     console.log(error);
